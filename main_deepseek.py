@@ -4,15 +4,17 @@ from sty import fg
 
 # set device to GPU if available
 if torch.cuda.is_available():
-    device = torch.device('cuda')
+    device = 0  # GPU device 0
+    print("Using GPU")
 else:
-    device = torch.device('cpu')
+    device = -1  # CPU
+    print("Using CPU")
     
 # set pipeline
 pipe = pipeline(
     "text-generation", 
-    "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", 
-    device_map = device
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+    device = device
 )
 
 def ask_question(message):
